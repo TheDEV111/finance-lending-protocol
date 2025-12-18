@@ -1,8 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { AppConfig, UserSession, showConnect } from '@stacks/connect';
-import { StacksMainnet } from '@stacks/network';
+import { AppConfig, UserSession, openAuthRequest } from '@stacks/connect';
 
 interface WalletContextType {
   userSession: UserSession | null;
@@ -38,28 +37,32 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const connect = () => {
-    showConnect({
-      appDetails: {
-        name: 'DeFi Lending Protocol',
-        icon: '/logo.png',
-      },
-      onFinish: () => {
-        if (userSession) {
-          const userData = userSession.loadUserData();
-          setIsConnected(true);
-          setAddress(userData.profile.stxAddress.mainnet);
-        }
-      },
-      userSession,
-    });
+  const connect = async () => {
+    if (!userSession) return;
+
+    try {
+      await openAuthRequest({
+        appDetails: {
+          name: 'DeFi Lending Protocol',
+          icon: window.location.origin + '/logo.png',
+        },
+        onFinish: () => {
+          // Reload to pick up the session
+          window.location.reload();
+        },
+        userSession,
+      });
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+    }
   };
 
   const disconnect = () => {
     if (userSession) {
-      userSession.signUserOut();
+      userSession.signUserOut(window.location.origin);
       setIsConnected(false);
       setAddress(null);
+      window.location.reload();
     }
   };
 
