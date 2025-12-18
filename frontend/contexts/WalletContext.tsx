@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { AppConfig, UserSession, openAuthRequest } from '@stacks/connect';
+import { AppConfig, UserSession, authenticate } from '@stacks/connect';
 
 interface WalletContextType {
   userSession: UserSession | null;
@@ -41,13 +41,12 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     if (!userSession) return;
 
     try {
-      await openAuthRequest({
+      await authenticate({
         appDetails: {
           name: 'DeFi Lending Protocol',
           icon: window.location.origin + '/logo.png',
         },
         onFinish: () => {
-          // Reload to pick up the session
           window.location.reload();
         },
         userSession,
