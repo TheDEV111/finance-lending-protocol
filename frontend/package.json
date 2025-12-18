@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hirosystems/chainhooks-client": "^1.0.0",
     "@stacks/blockchain-api-client": "^8.13.5",
     "@stacks/connect": "^8.2.4",
     "@stacks/network": "^7.3.1",
