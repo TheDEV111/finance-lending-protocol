@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useWallet } from '@/contexts/WalletContext';
 import { openContractCall } from '@stacks/connect';
-import { StacksMainnet } from '@stacks/network';
+import { STACKS_MAINNET } from '@stacks/network';
 import { CONTRACTS, PROTOCOL_CONSTANTS } from '@/lib/constants';
 import { stxToMicroStx, formatStx, isValidStxAmount } from '@/lib/utils';
 import { uintCV, PostConditionMode } from '@stacks/transactions';
@@ -39,10 +39,9 @@ export default function DepositTab({ currentCollateral, onSuccess }: DepositTabP
 
     try {
       const [contractAddress, contractName] = CONTRACTS.LENDING_POOL.split('.');
-      const network = new StacksMainnet();
 
       await openContractCall({
-        network,
+        network: STACKS_MAINNET,
         contractAddress,
         contractName,
         functionName: 'deposit-collateral',

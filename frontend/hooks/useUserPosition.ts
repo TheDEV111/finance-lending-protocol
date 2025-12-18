@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { useWallet } from '@/contexts/WalletContext';
 import { CONTRACTS } from '@/lib/constants';
 import {
-  callReadOnlyFunction,
+  fetchCallReadOnlyFunction,
   cvToJSON,
   standardPrincipalCV,
 } from '@stacks/transactions';
-import { StacksMainnet } from '@stacks/network';
+import { STACKS_MAINNET } from '@stacks/network';
 
 interface UserPosition {
   collateral: number;
@@ -39,11 +39,10 @@ export function useUserPosition() {
     setError(null);
 
     try {
-      const network = new StacksMainnet();
       const [contractAddress, contractName] = CONTRACTS.LENDING_POOL.split('.');
 
-      const result = await callReadOnlyFunction({
-        network,
+      const result = await fetchCallReadOnlyFunction({
+        network: STACKS_MAINNET,
         contractAddress,
         contractName,
         functionName: 'get-user-position',

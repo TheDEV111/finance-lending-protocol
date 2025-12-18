@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 import { CONTRACTS } from '@/lib/constants';
 import {
-  callReadOnlyFunction,
+  fetchCallReadOnlyFunction,
   cvToJSON,
 } from '@stacks/transactions';
-import { StacksMainnet } from '@stacks/network';
+import { STACKS_MAINNET } from '@stacks/network';
 
 interface PoolStats {
   totalLiquidity: number;
@@ -32,13 +32,12 @@ export function usePoolStats() {
     setError(null);
 
     try {
-      const network = new StacksMainnet();
       const [lendingAddress, lendingName] = CONTRACTS.LENDING_POOL.split('.');
       const [calcAddress, calcName] = CONTRACTS.INTEREST_CALCULATOR.split('.');
 
       // Fetch pool liquidity
-      const liquidityResult = await callReadOnlyFunction({
-        network,
+      const liquidityResult = await fetchCallReadOnlyFunction({
+        network: STACKS_MAINNET,
         contractAddress: lendingAddress,
         contractName: lendingName,
         functionName: 'get-pool-liquidity',
@@ -47,8 +46,8 @@ export function usePoolStats() {
       });
 
       // Fetch total borrowed
-      const borrowedResult = await callReadOnlyFunction({
-        network,
+      const borrowedResult = await fetchCallReadOnlyFunction({
+        network: STACKS_MAINNET,
         contractAddress: lendingAddress,
         contractName: lendingName,
         functionName: 'get-total-borrowed',
@@ -57,8 +56,8 @@ export function usePoolStats() {
       });
 
       // Fetch utilization rate
-      const utilizationResult = await callReadOnlyFunction({
-        network,
+      const utilizationResult = await fetchCallReadOnlyFunction({
+        network: STACKS_MAINNET,
         contractAddress: lendingAddress,
         contractName: lendingName,
         functionName: 'get-utilization-rate',
@@ -67,8 +66,8 @@ export function usePoolStats() {
       });
 
       // Fetch borrow rate
-      const borrowRateResult = await callReadOnlyFunction({
-        network,
+      const borrowRateResult = await fetchCallReadOnlyFunction({
+        network: STACKS_MAINNET,
         contractAddress: calcAddress,
         contractName: calcName,
         functionName: 'get-current-rate',
@@ -77,8 +76,8 @@ export function usePoolStats() {
       });
 
       // Fetch supply rate
-      const supplyRateResult = await callReadOnlyFunction({
-        network,
+      const supplyRateResult = await fetchCallReadOnlyFunction({
+        network: STACKS_MAINNET,
         contractAddress: calcAddress,
         contractName: calcName,
         functionName: 'get-supply-rate',
