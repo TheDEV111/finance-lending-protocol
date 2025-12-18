@@ -1,0 +1,25 @@
+.
+├── ARCHITECTURE.md
+├── Clarinet.toml
+├── contracts
+│   ├── collateral-manager.clar
+│   ├── interest-calculator.clar
+│   ├── lending-pool.clar
+│   └── price-oracle.clar
+├── DEPLOYMENT.md
+├── package.json
+├── package-lock.json
+├── project_structure.txt
+├── PROJECT_SUMMARY.md
+├── QUICK_REFERENCE.md
+├── README.md
+├── settings
+│   ├── Devnet.toml
+│   ├── Mainnet.toml
+│   └── Testnet.toml
+├── tests
+│   └── defi-lending-protocol.test.ts
+├── tsconfig.json
+└── vitest.config.ts
+
+3 directories, 19 files

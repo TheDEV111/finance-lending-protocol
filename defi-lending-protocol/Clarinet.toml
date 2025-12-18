@@ -7,20 +7,24 @@ cache_dir = "./.cache"
 
 [contracts.price-oracle]
 path = "contracts/price-oracle.clar"
-epoch = "3.0"
+clarity_version = 2
+epoch = 2.5
 
 [contracts.interest-calculator]
 path = "contracts/interest-calculator.clar"
-epoch = "3.0"
+clarity_version = 2
+epoch = 2.5
 
 [contracts.lending-pool]
 path = "contracts/lending-pool.clar"
-epoch = "3.0"
+clarity_version = 2
+epoch = 2.5
 depends_on = ["interest-calculator"]
 
 [contracts.collateral-manager]
 path = "contracts/collateral-manager.clar"
-epoch = "3.0"
+clarity_version = 2
+epoch = 2.5
 depends_on = ["price-oracle", "lending-pool"]
 
 [repl.analysis]

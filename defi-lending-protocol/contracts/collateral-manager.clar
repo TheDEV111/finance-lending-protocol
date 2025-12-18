@@ -90,9 +90,11 @@
 )
 
 (define-read-only (is-liquidatable (user principal))
-  (match (check-health-factor user)
-    health-factor (ok (<= health-factor LIQUIDATION_THRESHOLD))
-    error (err error)
+  (let
+    (
+      (health-factor (unwrap! (check-health-factor user) (err u999)))
+    )
+    (ok (<= health-factor LIQUIDATION_THRESHOLD))
   )
 )
 
