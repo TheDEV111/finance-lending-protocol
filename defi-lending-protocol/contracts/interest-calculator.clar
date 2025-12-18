@@ -224,8 +224,8 @@
     (var-set max-rate-param new-max-rate)
     (var-set optimal-utilization-param new-optimal-utilization)
     
-    ;; Immediately update rates with new parameters
-    (update-rates)
+    ;; Return success - rates will be updated on next pool interaction
+    (ok true)
   )
 )
 
