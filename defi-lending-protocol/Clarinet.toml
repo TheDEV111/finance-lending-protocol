@@ -13,15 +13,15 @@ epoch = "latest"
 path = "contracts/interest-calculator.clar"
 epoch = "latest"
 
-[contracts.collateral-manager]
-path = "contracts/collateral-manager.clar"
-epoch = "latest"
-depends_on = ["price-oracle"]
-
 [contracts.lending-pool]
 path = "contracts/lending-pool.clar"
 epoch = "latest"
-depends_on = ["interest-calculator", "collateral-manager"]
+depends_on = ["interest-calculator"]
+
+[contracts.collateral-manager]
+path = "contracts/collateral-manager.clar"
+epoch = "latest"
+depends_on = ["price-oracle", "lending-pool"]
 
 [repl.analysis]
 passes = ["check_checker"]

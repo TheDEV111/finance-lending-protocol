@@ -143,11 +143,9 @@
 
 ;; Public functions
 
-(define-public (update-rates)
+(define-public (update-rates (utilization uint))
   (let
     (
-      ;; Get current pool utilization from lending-pool
-      (utilization (contract-call? .lending-pool get-utilization-rate))
       (new-borrow-rate (calculate-borrow-rate utilization))
       (new-supply-rate (calculate-supply-rate utilization new-borrow-rate))
     )
