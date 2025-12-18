@@ -408,8 +408,8 @@
   (map-set asset-prices { asset: "STX" }
     {
       price: u1000000,
-      last-update-block: block-height,
-      last-update-time: burn-block-height,
+      last-update-block: u0,
+      last-update-time: u0,
       decimals: u6,
       source: "INIT"
     }

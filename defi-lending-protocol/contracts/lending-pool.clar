@@ -27,7 +27,7 @@
 (define-data-var total-liquidity uint u0)
 (define-data-var total-borrowed uint u0)
 (define-data-var global-interest-index uint INTEREST_PRECISION)
-(define-data-var last-update-block uint block-height)
+(define-data-var last-update-block uint u0)
 (define-data-var protocol-paused bool false)
 
 ;; Data Maps
@@ -334,9 +334,4 @@
     (var-set protocol-paused (not (var-get protocol-paused)))
     (ok (var-get protocol-paused))
   )
-)
-
-;; Initialize contract
-(begin
-  (var-set last-update-block block-height)
 )

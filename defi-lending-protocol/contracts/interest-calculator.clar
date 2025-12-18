@@ -31,7 +31,7 @@
 (define-data-var current-utilization-rate uint u0)
 (define-data-var current-borrow-rate uint BASE_RATE)
 (define-data-var current-supply-rate uint u0)
-(define-data-var last-rate-update uint block-height)
+(define-data-var last-rate-update uint u0)
 (define-data-var total-interest-accrued uint u0)
 
 ;; Custom rate parameters (can be updated by admin)
@@ -255,9 +255,4 @@
     )
     final-amount
   )
-)
-
-;; Initialize
-(begin
-  (var-set last-rate-update block-height)
 )
