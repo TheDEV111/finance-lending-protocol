@@ -1,13 +1,27 @@
 [project]
 name = "defi-lending-protocol"
-description = ""
+description = "A decentralized lending protocol on Stacks"
 authors = []
 telemetry = true
 cache_dir = "./.cache"
 
-# [contracts.counter]
-# path = "contracts/counter.clar"
-# epoch = "latest"
+[contracts.price-oracle]
+path = "contracts/price-oracle.clar"
+epoch = "latest"
+
+[contracts.interest-calculator]
+path = "contracts/interest-calculator.clar"
+epoch = "latest"
+
+[contracts.collateral-manager]
+path = "contracts/collateral-manager.clar"
+epoch = "latest"
+depends_on = ["price-oracle"]
+
+[contracts.lending-pool]
+path = "contracts/lending-pool.clar"
+epoch = "latest"
+depends_on = ["interest-calculator", "collateral-manager"]
 
 [repl.analysis]
 passes = ["check_checker"]
